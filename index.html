@@ -1,169 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MAX MARKET - Cryptocurrency Market</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px 0;
-    }
-
-    header .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header h1 {
-      margin: 0;
-    }
-
-    header nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-
-    header nav ul li {
-      margin-left: 20px;
-    }
-
-    header nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .container {
-      width: 80%;
-      margin: auto;
-      overflow: hidden;
-    }
-
-    main {
-      padding: 20px 0;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    table, th, td {
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 15px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #333;
-      color: white;
-    }
-
-    td img {
-      width: 30px;
-    }
-
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Replica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f6fa;
+        }
+        header {
+            background-color: #1e2329;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #141920;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        nav a:hover {
+            background-color: #2a2f37;
+        }
+        .container {
+            padding: 20px;
+        }
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .market-table th, .market-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .market-table th {
+            background-color: #141920;
+            color: white;
+        }
+        .market-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .section {
+            margin-top: 40px;
+        }
+        .section h2 {
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: #1e2329;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>MAX MARKET</h1>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Cryptocurrencies</a></li>
-          <li><a href="#">Exchanges</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Sign In</a></li>
-          <li><a href="#">Sign Up</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="container">
-      <h2>Cryptocurrency Market Overview</h2>
-      <table id="cryptoTable">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Market Cap</th>
-            <th>Volume</th>
-            <th>24h Change</th>
-            <th>Graph</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data will be populated by JavaScript -->
-        </tbody>
-      </table>
-    </div>
-  </main>
+<header>
+    <h1>Binance</h1>
+</header>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2024 MAX MARKET. All rights reserved.</p>
-    </div>
-  </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Markets</a>
+    <a href="#">Trade</a>
+    <a href="#">Finance</a>
+    <a href="#">About</a>
+</nav>
 
-      fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          const tableBody = document.querySelector('#cryptoTable tbody');
-          data.forEach(coin => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>${coin.market_cap_rank}</td>
-              <td>
-                <img src="${coin.image}" alt="${coin.name} logo">
-                ${coin.name}
-              </td>
-              <td>$${coin.current_price.toLocaleString()}</td>
-              <td>$${coin.market_cap.toLocaleString()}</td>
-              <td>$${coin.total_volume.toLocaleString()}</td>
-              <td style="color: ${coin.price_change_percentage_24h > 0 ? 'green' : 'red'};">
-                ${coin.price_change_percentage_24h.toFixed(2)}%
-              </td>
-              <td><button onclick="showGraph('${coin.id}')">View Graph</button></td>
-            `;
-            tableBody.appendChild(row);
-          });
-        })
-        .catch(error => console.error('Error fetching data:', error));
+<div class="container">
+    <div class="section">
+        <h2>Top 200 Cryptocurrencies</h2>
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>24h Change</th>
+                </tr>
+            </thead>
+            <tbody id="crypto-table-body">
+                <!-- Rows will be added dynamically with JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Top 5 Cryptocurrencies</h2>
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>24h Change</th>
+                </tr>
+            </thead>
+            <tbody id="top-5-table-body">
+                <!-- Rows will be added dynamically with JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Top Gainers</h2>
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>24h Change</th>
+                </tr>
+            </thead>
+            <tbody id="top-gainers-table-body">
+                <!-- Rows will be added dynamically with JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Top Losers</h2>
+        <table class="market-table">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>24h Change</th>
+                </tr>
+            </thead>
+            <tbody id="top-losers-table-body">
+                <!-- Rows will be added dynamically with JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <div class="section">
+        <h2>Spot</h2>
+        <p>Details about spot trading.</p>
+    </div>
+    <div class="section">
+        <h2>Futures</h2>
+        <p>Details about futures trading.</p>
+    </div>
+    <div class="section">
+        <h2>Portfolio</h2>
+        <p>Details about portfolio management.</p>
+    </div>
+</footer>
+
+<script>
+async function fetchCryptocurrencyData() {
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false');
+        const data = await response.json();
+        updateTable(data);
+    } catch (error) {
+        console.error('Error fetching cryptocurrency data:', error);
+    }
+}
+
+function updateTable(data) {
+    const tableBody = document.getElementById('crypto-table-body');
+    const top5TableBody = document.getElementById('top-5-table-body');
+    const topGainersTableBody = document.getElementById('top-gainers-table-body');
+    const topLosersTableBody = document.getElementById('top-losers-table-body');
+
+    tableBody.innerHTML = '';
+    top5TableBody.innerHTML = '';
+    topGainersTableBody.innerHTML = '';
+    topLosersTableBody.innerHTML = '';
+
+    // Sort data for top gainers and losers
+    const sortedByGainers = [...data].sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
+    const sortedByLosers = [...data].sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
+
+    data.forEach((coin, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${coin.image}" alt="${coin.name}" width="32" height="32"></td>
+            <td>${coin.name}</td>
+            <td>${coin.symbol.toUpperCase()}</td>
+            <td>$${coin.current_price.toLocaleString()}</td>
+            <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+        `;
+        tableBody.appendChild(row);
+
+        if (index < 5) {
+            const top5Row = row.cloneNode(true);
+            top5TableBody.appendChild(top5Row);
+        }
     });
 
-    function showGraph(coinId) {
-      alert(`Display graph for ${coinId}`);
-    }
-  </script>
+    sortedByGainers.slice(0, 5).forEach(coin => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${coin.image}" alt="${coin.name}" width="32" height="32"></td>
+            <td>${coin.name}</td>
+            <td>${coin.symbol.toUpperCase()}</td>
+            <td>$${coin.current_price.toLocaleString()}</td>
+            <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+        `;
+        topGainersTableBody.appendChild(row);
+    });
+
+    sortedByLosers.slice(0, 5).forEach(coin => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><img src="${coin.image}" alt="${coin.name}" width="32" height="32"></td>
+            <td>${coin.name}</td>
+            <td>${coin.symbol.toUpperCase()}</td>
+            <td>$${coin.current_price.toLocaleString()}</td>
+            <td>${coin.price_change_percentage_24h.toFixed(2)}%</td>
+        `;
+        topLosersTableBody.appendChild(row);
+    });
+}
+
+// Fetch data every 0.8 seconds
+setInterval(fetchCryptocurrencyData, 800);
+
+// Initial fetch
+fetchCryptocurrencyData();
+</script>
+
 </body>
 </html>
